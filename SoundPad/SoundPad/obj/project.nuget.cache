@@ -1,8 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "Qjbo45SSqUaAoHJ9qV5ulgZlTtk+i0qdVUJHYmpka7Xq9oMu5qMip0jrb1Yoin49r7DIvrqH/R+TmWchLlHnAA==",
+  "dgSpecHash": "RHetQ1LM9hd/qMvEx04Ne4ZXBKvFiWpjRPY6ttSO/eufY2u00ixiYWXpSGFI0uTXVDXej9ohzzRX8C+C7QlZqg==",
   "success": true,
   "projectFilePath": "D:\\Projects\\CSharpProjects\\SoundPad\\SoundPad\\SoundPad\\SoundPad.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\stepa\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\naudio\\2.2.1\\naudio.2.2.1.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\naudio.asio\\2.2.1\\naudio.asio.2.2.1.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\naudio.core\\2.2.1\\naudio.core.2.2.1.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\naudio.midi\\2.2.1\\naudio.midi.2.2.1.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\naudio.wasapi\\2.2.1\\naudio.wasapi.2.2.1.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\naudio.winmm\\2.2.1\\naudio.winmm.2.2.1.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\stepa\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }
