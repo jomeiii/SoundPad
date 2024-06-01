@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SoundPad")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a70bc7b2e9ba9d16cbf75976fd718d995ee0a5e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a7dfb96977a5373981bc9fc34912b2cddc3e049")]
 [assembly: System.Reflection.AssemblyProductAttribute("SoundPad")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SoundPad")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

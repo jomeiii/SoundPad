@@ -1,15 +1,17 @@
-﻿using SoundPad.UI;
+﻿using SoundPad.Struct;
+using SoundPad.UI;
 
 namespace SoundPad
 {
     public abstract class Program
     {
         public static readonly string FolderPath = @"D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\Sounds";
-        public static readonly List<string> SoundPaths = new(); 
-
+        public static readonly List<string> SoundPaths = new();
 
         private static readonly SoundPlayer SoundPlayer = new SoundPlayer();
         private static readonly ConsoleColorChanger ColorChanger = new ConsoleColorChanger();
+
+        public static Sound CurrentSound { get; private set; } = new();
 
         static Program()
         {
@@ -25,20 +27,28 @@ namespace SoundPad
                 return;
             }
 
-            var filePath = @"D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\Sounds\sound.wav";
+            var index = new Random().Next(0, SoundPaths.Count);
+            var filePath = SoundPaths[index];
+            CurrentSound = new Sound(filePath, index);
             if (!File.Exists(filePath))
             {
                 Console.WriteLine("Invalid file path");
                 return;
             }
 
+            ColorChanger.WriteColoredText(text: $"Playback started for file: {CurrentSound.Path}", ConsoleColor.Yellow,
+                ConsoleColor.Black);
+            ColorChanger.WriteColoredText(text: $"Now playing: {CurrentSound.Name}", ConsoleColor.Yellow,
+                ConsoleColor.Black);
+            
             SoundPlayer.PlaySound(filePath);
         }
 
         private static void Stop()
         {
             SoundPlayer.StopSound();
-            Console.WriteLine("Playback stopped");
+            ColorChanger.WriteColoredText(text: $"Playback stopped for file: {CurrentSound.Path}", ConsoleColor.Yellow,
+                ConsoleColor.Black);
         }
 
         private static void GetSoundPaths()
