@@ -23,6 +23,8 @@ public abstract class Program
 
     private static void Play()
     {
+        Console.Clear();
+
         if (SoundPlayer.IsPlaying)
         {
             Console.WriteLine("Already playing. Stop the song that's playing right now");
@@ -37,10 +39,10 @@ public abstract class Program
             return;
         }
 
-        ColorChanger.WriteColoredText($"Playback started for file: {CurrentSound.Path}", ConsoleColor.Yellow,
-            ConsoleColor.Black);
-        ColorChanger.WriteColoredText($"Now playing: {CurrentSound.Name}", ConsoleColor.Yellow,
-            ConsoleColor.Black);
+
+        Console.Clear();
+        ColorChanger.WriteColoredText($"Playback started for file: {CurrentSound.Path}");
+        ColorChanger.WriteColoredText($"Now playing: {CurrentSound.Name}");
 
         SoundPlayer.PlaySound(filePath);
     }
@@ -48,8 +50,7 @@ public abstract class Program
     private static void Stop()
     {
         SoundPlayer.StopSound();
-        ColorChanger.WriteColoredText($"Playback stopped for file: {CurrentSound.Path}", ConsoleColor.Yellow,
-            ConsoleColor.Black);
+        ColorChanger.WriteColoredText($"Playback stopped for file: {CurrentSound.Path}");
     }
 
     private static void SetSoundPaths()
@@ -90,8 +91,7 @@ public abstract class Program
 
     private static void GetConfigManager()
     {
-        ColorChanger.WriteColoredText("Write sounds folder path.", ConsoleColor.Yellow,
-            ConsoleColor.Black);
+        ColorChanger.WriteColoredText("Write sounds folder path.");
 
         ConfigManager.config.soundPath = Console.ReadLine();
     }
@@ -108,48 +108,45 @@ public abstract class Program
     /// </remarks>
     private static string ChooseCurrentSound()
     {
-        ColorChanger.WriteColoredText("Write index sound to choose it.", ConsoleColor.Yellow,
-            ConsoleColor.Black);
+        ColorChanger.WriteColoredText("Write index sound to choose it.");
 
-        foreach (var sound in Sounds) Console.WriteLine($"{sound.Index + 1}. {sound.Name}");
+        foreach (var sound in Sounds) 
+            Console.WriteLine($"{sound.Index + 1}. {sound.Name}");
 
-        var input = Console.ReadLine();
         while (true)
+        {
+            var input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input))
             {
-                ColorChanger.WriteColoredText("Invalid input! Try again.", ConsoleColor.Yellow,
-                    ConsoleColor.Black);
+                ColorChanger.WriteColoredText("Invalid input! Try again.");
             }
-            else if (!int.TryParse(input, out var index))
+            else if (!int.TryParse(input, out var index) || index >= Sounds.Count)
             {
-                ColorChanger.WriteColoredText("Invalid index! Try again.", ConsoleColor.Yellow,
-                    ConsoleColor.Black);
+                ColorChanger.WriteColoredText("Invalid index! Try again.");
             }
             else
             {
                 index--;
                 CurrentSound = Sounds[index];
 
-                ColorChanger.WriteColoredText($"Sound {CurrentSound.Index + 1}. {CurrentSound.Name} selected.",
-                    ConsoleColor.Yellow,
-                    ConsoleColor.Black);
+                ColorChanger.WriteColoredText($"Sound {CurrentSound.Index + 1}. {CurrentSound.Name} selected.");
                 break;
             }
+        }
 
         return CurrentSound.Path;
     }
 
     public static void Main(string[] args)
     {
-        ColorChanger.WriteColoredText("Sound Pad", ConsoleColor.DarkCyan, ConsoleColor.White);
-        ColorChanger.WriteColoredText("Press Ctrl-C or write \"quit\" to quit.", ConsoleColor.Yellow,
-            ConsoleColor.Black);
-        ColorChanger.WriteColoredText("Write \"play\" to play sound or \"stop\" to stop.", ConsoleColor.Yellow,
-            ConsoleColor.Black);
+        ColorChanger.WriteColoredText("Sound Pad", ConsoleColor.White, ConsoleColor.DarkCyan);
 
         while (true)
         {
-            Console.Write("Wait command: ");
+            ColorChanger.WriteColoredText("Press Ctrl-C or write \"quit\" to quit.");
+            ColorChanger.WriteColoredText("Write \"play\" to play sound or \"stop\" to stop.");
+            Console.Write("\nWait command: ");
+
             var input = Console.ReadLine()?.Trim().ToLower();
 
             if (input is "play" or "p")

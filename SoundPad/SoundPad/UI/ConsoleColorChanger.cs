@@ -17,7 +17,8 @@ public class ConsoleColorChanger
         Console.ResetColor();
     }
 
-    public void WriteColoredText(string text, ConsoleColor foregroundColor, ConsoleColor backgroundColor)
+    public void WriteColoredText(string text, ConsoleColor backgroundColor = ConsoleColor.Black,
+        ConsoleColor foregroundColor = ConsoleColor.Yellow)
     {
         var originalForegroundColor = Console.ForegroundColor;
         var originalBackgroundColor = Console.BackgroundColor;
