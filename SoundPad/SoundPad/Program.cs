@@ -7,6 +7,7 @@ namespace SoundPad;
 public abstract class Program
 {
     public static readonly List<string> SoundPaths = new();
+    public static List<Sound> Sounds = new();
 
     private static readonly SoundPlayer SoundPlayer = new();
     private static readonly ConsoleColorChanger ColorChanger = new();
@@ -14,7 +15,7 @@ public abstract class Program
 
     static Program()
     {
-        GetSoundPaths();
+        SetSoundPaths();
         Console.WriteLine("Static constructor executed");
     }
 
@@ -24,13 +25,12 @@ public abstract class Program
     {
         if (SoundPlayer.IsPlaying)
         {
-            Console.WriteLine("Already playing");
+            Console.WriteLine("Already playing. Stop the song that's playing right now");
             return;
         }
 
-        var index = new Random().Next(0, SoundPaths.Count);
-        var filePath = SoundPaths[index];
-        CurrentSound = new Sound(filePath, index);
+        string filePath = ChooseCurrentSound();
+        
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Invalid file path");
@@ -52,7 +52,7 @@ public abstract class Program
             ConsoleColor.Black);
     }
 
-    private static void GetSoundPaths()
+    private static void SetSoundPaths()
     {
         Console.WriteLine($"Checking directory: {ConfigManager.config.soundPath}");
 
@@ -74,19 +74,72 @@ public abstract class Program
 
         Console.WriteLine("Found files:");
 
-        foreach (var file in files)
+        for (var index = 0; index < files.Length; index++)
         {
+            var file = files[index];
             SoundPaths.Add(file);
+            SetSound(file, index);
             Console.WriteLine(file + " ");
         }
+    }
+
+    private static void SetSound(string path, int index)
+    {
+        Sounds.Add(new Sound(path, index));
     }
 
     private static void GetConfigManager()
     {
         ColorChanger.WriteColoredText("Write sounds folder path.", ConsoleColor.Yellow,
             ConsoleColor.Black);
-        
+
         ConfigManager.config.soundPath = Console.ReadLine();
+    }
+
+    /// <summary>
+    /// Prompts the user to choose a sound from the available list by its index and returns the path of the selected sound.
+    /// </summary>
+    /// <returns>The file path of the selected sound.</returns>
+    /// <remarks>
+    /// The method displays a list of available sounds with their indices and prompts the user to input the index of the desired sound.
+    /// If the input is invalid or the index is out of range, the user is prompted to try again until a valid selection is made.
+    /// </remarks>
+    private static string ChooseCurrentSound()
+    {
+        ColorChanger.WriteColoredText(text: "Write index sound to choose it.", foregroundColor: ConsoleColor.Yellow,
+            ConsoleColor.Black);
+
+        foreach (var sound in Sounds)
+        {
+            Console.WriteLine($"{sound.Index + 1}. {sound.Name}");
+        }
+
+        string? input = Console.ReadLine();
+        while (true)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                ColorChanger.WriteColoredText(text: "Invalid input! Try again.", foregroundColor: ConsoleColor.Yellow,
+                    ConsoleColor.Black);
+            }
+            else if (!int.TryParse(input, out var index))
+            {
+                ColorChanger.WriteColoredText(text: "Invalid index! Try again.", foregroundColor: ConsoleColor.Yellow,
+                    ConsoleColor.Black);
+            }
+            else
+            {
+                index--;
+                CurrentSound = Sounds[index];
+
+                ColorChanger.WriteColoredText(text: $"Sound {CurrentSound.Index + 1}. {CurrentSound.Name} selected.",
+                    foregroundColor: ConsoleColor.Yellow,
+                    ConsoleColor.Black);
+                break;
+            }
+        }
+
+        return CurrentSound.Path;
     }
 
     public static void Main(string[] args)
@@ -100,7 +153,7 @@ public abstract class Program
         while (true)
         {
             Console.Write("Wait command: ");
-            var input = Console.ReadLine().Trim().ToLower();
+            var input = Console.ReadLine()?.Trim().ToLower();
 
             if (input is "play" or "p")
             {
