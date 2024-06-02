@@ -1,35 +1,31 @@
-﻿namespace SoundPad.Config
+﻿namespace SoundPad.Config;
+
+public class ConfigManager
 {
-    public class ConfigManager
+    private static readonly string ConfigPath =
+        @"D:\\Projects\\CSharpProjects\\SoundPad\\SoundPad\\SoundPad\\config.txt";
+
+    public Config config;
+
+    public ConfigManager()
     {
-        public Config config;
+        using StreamReader sr = new(ConfigPath);
 
-        private static readonly string ConfigPath =
-            @"D:\\Projects\\CSharpProjects\\SoundPad\\SoundPad\\SoundPad\\config.txt";
-
-        public ConfigManager()
+        while (sr.ReadLine() is { } line)
         {
-            using StreamReader sr = new(ConfigPath);
+            config = ParseConfig(sr, line);
 
-            while (sr.ReadLine() is { } line)
-            {
-                config = ParseConfig(sr, line);
-                
-                string delimiter = sr.ReadLine();
-                if (delimiter == ";")
-                    break;
-                if (delimiter != ",")
-                {
-                    break;
-                }
-            }
+            var delimiter = sr.ReadLine();
+            if (delimiter == ";")
+                break;
+            if (delimiter != ",") break;
         }
+    }
 
-        private static Config ParseConfig(StreamReader sr, string firstLine)
-        {
-            string soundPath = firstLine.Replace("SoundPath: ", "");
+    private static Config ParseConfig(StreamReader sr, string firstLine)
+    {
+        var soundPath = firstLine.Replace("SoundPath: ", "");
 
-            return new Config(soundPath: soundPath);
-        }
+        return new Config(soundPath);
     }
 }

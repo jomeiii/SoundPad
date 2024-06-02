@@ -8,6 +8,7 @@ public abstract class Program
 {
     public static readonly List<string> SoundPaths = new();
     public static List<Sound> Sounds = new();
+    public static Sound CurrentSound;
 
     private static readonly SoundPlayer SoundPlayer = new();
     private static readonly ConsoleColorChanger ColorChanger = new();
@@ -19,7 +20,6 @@ public abstract class Program
         Console.WriteLine("Static constructor executed");
     }
 
-    public static Sound CurrentSound { get; private set; }
 
     private static void Play()
     {
@@ -29,8 +29,8 @@ public abstract class Program
             return;
         }
 
-        string filePath = ChooseCurrentSound();
-        
+        var filePath = ChooseCurrentSound();
+
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Invalid file path");
@@ -97,34 +97,32 @@ public abstract class Program
     }
 
     /// <summary>
-    /// Prompts the user to choose a sound from the available list by its index and returns the path of the selected sound.
+    ///     Prompts the user to choose a sound from the available list by its index and returns the path of the selected sound.
     /// </summary>
     /// <returns>The file path of the selected sound.</returns>
     /// <remarks>
-    /// The method displays a list of available sounds with their indices and prompts the user to input the index of the desired sound.
-    /// If the input is invalid or the index is out of range, the user is prompted to try again until a valid selection is made.
+    ///     The method displays a list of available sounds with their indices and prompts the user to input the index of the
+    ///     desired sound.
+    ///     If the input is invalid or the index is out of range, the user is prompted to try again until a valid selection is
+    ///     made.
     /// </remarks>
     private static string ChooseCurrentSound()
     {
-        ColorChanger.WriteColoredText(text: "Write index sound to choose it.", foregroundColor: ConsoleColor.Yellow,
+        ColorChanger.WriteColoredText("Write index sound to choose it.", ConsoleColor.Yellow,
             ConsoleColor.Black);
 
-        foreach (var sound in Sounds)
-        {
-            Console.WriteLine($"{sound.Index + 1}. {sound.Name}");
-        }
+        foreach (var sound in Sounds) Console.WriteLine($"{sound.Index + 1}. {sound.Name}");
 
-        string? input = Console.ReadLine();
+        var input = Console.ReadLine();
         while (true)
-        {
             if (string.IsNullOrWhiteSpace(input))
             {
-                ColorChanger.WriteColoredText(text: "Invalid input! Try again.", foregroundColor: ConsoleColor.Yellow,
+                ColorChanger.WriteColoredText("Invalid input! Try again.", ConsoleColor.Yellow,
                     ConsoleColor.Black);
             }
             else if (!int.TryParse(input, out var index))
             {
-                ColorChanger.WriteColoredText(text: "Invalid index! Try again.", foregroundColor: ConsoleColor.Yellow,
+                ColorChanger.WriteColoredText("Invalid index! Try again.", ConsoleColor.Yellow,
                     ConsoleColor.Black);
             }
             else
@@ -132,12 +130,11 @@ public abstract class Program
                 index--;
                 CurrentSound = Sounds[index];
 
-                ColorChanger.WriteColoredText(text: $"Sound {CurrentSound.Index + 1}. {CurrentSound.Name} selected.",
-                    foregroundColor: ConsoleColor.Yellow,
+                ColorChanger.WriteColoredText($"Sound {CurrentSound.Index + 1}. {CurrentSound.Name} selected.",
+                    ConsoleColor.Yellow,
                     ConsoleColor.Black);
                 break;
             }
-        }
 
         return CurrentSound.Path;
     }
