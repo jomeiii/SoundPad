@@ -1,0 +1,2 @@
+﻿SoundPath: D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\Sounds
+;

@@ -1,0 +1,11 @@
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\SoundPad.exe
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\SoundPad.dll
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\SoundPad.deps.json
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\SoundPad.runtimeconfig.json
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\SoundPad.pdb
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\NAudio.dll
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\NAudio.Asio.dll
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\NAudio.Core.dll
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\NAudio.Midi.dll
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\NAudio.Wasapi.dll
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\publish\NAudio.WinMM.dll

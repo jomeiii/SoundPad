@@ -1,0 +1,2 @@
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\win-x64\publish\SoundPad.pdb
+D:\Projects\CSharpProjects\SoundPad\SoundPad\SoundPad\bin\Release\net8.0\win-x64\publish\SoundPad.exe
